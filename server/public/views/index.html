@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Comment Screen</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" media="screen" href="/public/stylesheets/main.css">
+        <link rel="shortcut icon" type="image/png" href="/public/images/favicon.png">
+        <script type="text/javascript" src="/public/javascripts/jquery-1.9.0.min.js"></script>
+    </head>
+
+    <body>
+        <div id="content_body" class="center_block" style="width:90%;text-align:center; border-style: dashed;border-width: 0px 5px 0px 5px;height:100%">
+            <div class="center_block" style="background:#E5E5E5;width:90%;text-align:center;margin-top:20px;">
+                <input id="text" name="comment" rows="2" onkeydown="if(event.keyCode == 13){javascript:send();}" style="width:90%;text-align:left;margin:15px;font-size:1.5em"></input>
+            </div>
+            <div class="clearfix center_block" style="width:80%;margin-top:30px">
+                <div id="size1" class="fontsize" onclick="javascript:setSize('size1');"><span class="font_str">S</span></div>
+                <div id="size2" class="fontsize fontsize_on" onclick="javascript:setSize('size2');"><span class="font_str">M</span></div>
+                <div id="size3" class="fontsize" onclick="javascript:setSize('size3');"><span class="font_str">L</span></div>
+            </div>
+            <div class="clearfix center_block colorfolder" style="margin-top:10px">
+                <div id="color1" class="colorbox"></div>
+                <div id="color2" class="colorbox"></div>
+                <div id="color3" class="colorbox"></div>
+                <div id="color4" class="colorbox"></div>
+                <div id="color5" class="colorbox"></div>
+                <div id="color6" class="colorbox"></div>
+                <div id="color7" class="colorbox"></div>
+                <div id="color8" class="colorbox"></div>
+                <div id="color9" class="colorbox"></div>
+            </div>
+            <div style="margin-top:30px">
+                <a id="send" class="btn" href="javascript:send();" style="width:70%;text-align:center;font-size:1.5em;">Send</a>
+                <img id="kurukuru" src='/public/images/kurukuru.gif' style="display:none;">
+            </div>
+            
+            <script src="/socket.io/socket.io.js"></script>
+            <script>
+              const socket = io();
+              function send() {
+                var comment = {'text': $('#text').val(), 'size': 13, 'color': '0x33FF55'};
+                socket.emit('chat message', JSON.stringify(comment));
+                $('#text').val('');
+                return false;
+              }
+            </script>
+        </div>
+    </body>
+</html>

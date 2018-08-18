@@ -1,0 +1,25 @@
+{
+  "name": "comment_screen_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/app.js",
+  "scripts": {
+    "start": "ENV=PRO node ./dist/app.js",
+    "babel-start": "ENV=PRO ./node_modules/.bin/babel-node ./src/app.js --presets babel-preset-env -x js,json",
+    "build": "./node_modules/.bin/babel src -d dist --presets babel-preset-env --copy-files",
+    "cf-push": "cf push -f manifest.yml"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "~4.16.3",
+    "socket.io": "~2.1.1"
+  },
+  "engines": {
+    "node": "8.11.x",
+    "npm": "4.3.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
